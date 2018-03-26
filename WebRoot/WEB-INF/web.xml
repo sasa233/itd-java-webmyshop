@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+  <!-- web.xml是java web项目的入口（web项目是没有main方法的） -->
+  <servlet>
+  	<!-- servlet-name是类的别名 -->
+    <servlet-name>ProductServlet</servlet-name>
+    <!-- servlet-class是类的全名，为方便维护，以后会用别名代替全名 -->
+    <servlet-class>cn.yd.shop.servlet.ProductServlet</servlet-class>
+  </servlet>
+
+  <!-- 指定了当前servlet的访问地址 -->
+  <servlet-mapping>
+    <servlet-name>ProductServlet</servlet-name>
+    <!-- 访问当前servlet的url地址 -->
+    <url-pattern>/servlet/ProductServlet</url-pattern>
+  </servlet-mapping>
+
+</web-app>

@@ -25,11 +25,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     您好！谢谢~ <br>
     
     <!-- 所有资源前必须添加工程名 -->
-    <form action="/webmyshop/servlet/ProductServlet" method="post">
-    	商品名称：<input type="text" name="name" /><br />
-    	商品价格：<input type="text" name="price" /><br />
-    	商品备注：<input type="text" name="remark" /><br />
-    	<button type="submit">提交</button>
-    </form>
+    此网页用于查询。
   </body>
 </html>
