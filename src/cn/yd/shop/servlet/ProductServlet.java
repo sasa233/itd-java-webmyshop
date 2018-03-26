@@ -80,7 +80,7 @@ public class ProductServlet extends HttpServlet {
 		product.setRemark(request.getParameter("remark"));
 		productDaoImpl.save(product);
 		// 返回给客户端响应 页面或JSON
-		// sendRedirect重定向，web中访问资源都需要加工程名
+		// sendRedirect页面重定向，web中访问资源都需要加工程名
 		response.sendRedirect("/webmyshop/query.jsp");
 //		response.setContentType("text/html");
 //		PrintWriter out = response.getWriter();
