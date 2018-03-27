@@ -48,6 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		<th>商品名称</th>
     		<th>商品价格</th>
     		<th>商品备注</th>
+    		<th>日期</th>
     		<th>操作</th>
     	</tr>
     	<!-- 
@@ -62,7 +63,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		<td>${product.name}</td>
     		<td>${product.price}</td>
     		<td>${product.remark}</td>
-    		<td><a href="/webmyshop/servlet/ProductServlet?id=${product.id}&type=delete" >删除</a>|更新</td>
+    		<td>${product.date}</td>
+    		<td><a href="/webmyshop/servlet/ProductServlet?id=${product.id}&type=delete" >删除</a>
+    		|<a href="/webmyshop/servlet/ProductServlet?id=${product.id}&type=getById" >更新</td>
     	</tr>
     	</c:forEach>
     </table>
