@@ -35,6 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <form action="/webmyshop/servlet/ProductServlet" method="get" >
        	关键字：<input type="text" name="keyword" /><br />
     	<button type="submit">提交</button>
+    	<input type="hidden" name="type" value="query">
     </form>
     
     获取数据为：<%=request.getAttribute("proList") %>
@@ -61,7 +62,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		<td>${product.name}</td>
     		<td>${product.price}</td>
     		<td>${product.remark}</td>
-    		<td>删除|更新</td>
+    		<td><a href="/webmyshop/servlet/ProductServlet?id=${product.id}&type=delete" >删除</a>|更新</td>
     	</tr>
     	</c:forEach>
     </table>
