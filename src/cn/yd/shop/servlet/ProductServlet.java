@@ -21,7 +21,8 @@ import cn.yd.shop.dao.ProductDaoImpl;
 import cn.yd.shop.model.Product;
 
 // 由于此类继承了HttpServlet，它可接受Http请求，此类可与Dao交互
-//@WebServlet(urlPatterns = "/servlet/ProductServlet")
+
+//@WebServlet(urlPatterns="/servlet/ProductServlet")
 public class ProductServlet extends HttpServlet {
 
 	// 此成员变量用于调用方法，无线程安全问题
@@ -31,6 +32,8 @@ public class ProductServlet extends HttpServlet {
 	 * Filter,Listener,Servlet称为web三大组件，他们都是单例模式
 	 * Servlet第一个请求的时候创建，然后常驻内存，单例模式类不能有用来存储数据的成员变量，否则会出现线程安全问题
 	 * 为解决此问题，使用了内置对象Session
+	 * 
+	 * 
 	 */
 
 	// Web：Servlet,Dao,Service等类的对象都是单例的，Model类是多例的
@@ -217,7 +220,15 @@ public class ProductServlet extends HttpServlet {
 	 *             if an error occurred
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 配置request保存内容的格式
+		// request.setCharacterEncoding("UTF-8"); //改为使用过滤器
+		// POST方式的数据封装在表单中，Tomcat要解析地址
+		// GET方式的数据放在了地址栏，Tomcat要解析地址，而Tomcat编码默认为8859-1，无法识别中文，需配置Tomcat编码为UTF-8
+		// 找到server.xml，增加如下内容
+		//    <Connector URIEncoding="UTF-8" 
+		//      connectionTimeout="20000" port="8080" protocol="HTTP/1.1" redirectPort="8443"/>
 
+		
 		// 通过获取type得到请求的类型
 		String type = request.getParameter("type");
 		// 通过反射获取当前Servlet中与type同名的方法

@@ -26,6 +26,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <!-- 所有资源前必须添加工程名 -->
     <form action="/webmyshop/servlet/ProductServlet" method="post">
+    	<!-- 
+    		request.getAttribute(arg0)
+    		request.setAttribute(arg0, arg1)
+    		request.getParameter(arg0) 用于获取前端数据（表单、地址栏等）
+    	 -->
     	商品名称：<input type="text" name="name" value="${product.name}" /><br />
     	<!-- EL表达式搜索顺序为requestScope,sessionScope,applicationScope -->
     	商品价格：<input type="text" name="price" value="${requestScope.product.price}" /><br />
