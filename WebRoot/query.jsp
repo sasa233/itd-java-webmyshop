@@ -1,14 +1,15 @@
-<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- JSTL标签本质上就是被封装的Java类 -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!-- alt + / 提示快捷键 -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"> 
 <html>
   <head>
     <base href="<%=basePath%>">
-    
     <title>My JSP 'index.jsp' starting page</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -35,8 +36,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        	关键字：<input type="text" name="keyword" /><br />
     	<button type="submit">提交</button>
     </form>
+    
     获取数据为：<%=request.getAttribute("proList") %>
-    <table>
+    <!-- EL表达式 -->
+    获取数据为：${requestScope.proList}
+    
+    <table border=6 width=600>
     	<tr>
     		<th>编号</th>
     		<th>商品名称</th>
@@ -44,14 +49,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		<th>商品备注</th>
     		<th>操作</th>
     	</tr>
-    	<!-- 应该使用循环迭代数据，可以采用JSTL标签来输出数据 -->
+    	<!-- 
+    		应该使用循环迭代数据，可以采用JSTL标签来输出数据（JSTL与HTML可无缝整合）
+    		c.tld是标签描述文件
+    	 -->
+    	<!-- request.getAttribute("proList") -->
+    	<c:forEach items="${requestScope.proList}" var="product" varStatus="num">
     	<tr>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-    		<td></td>
-    		<td></td>
+    		<td>${num.count}</td>
+    		<!-- 为访问私有属性，调用了相应的get方法 -->
+    		<td>${product.name}</td>
+    		<td>${product.price}</td>
+    		<td>${product.remark}</td>
+    		<td>删除|更新</td>
     	</tr>
+    	</c:forEach>
     </table>
   </body>
 </html>

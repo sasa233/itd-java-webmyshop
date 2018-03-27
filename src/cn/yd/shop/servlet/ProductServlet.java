@@ -59,11 +59,12 @@ public class ProductServlet extends HttpServlet {
 		// 3、返回结果(json/jsp)
 		// Servlet到JSP如何传递数据；JSP提供内置对象：request, session, application
 		request.setAttribute("proList", proList);
+		System.out.println(proList.size());
 		// response.sendRedirect("/webmyshop/query.jsp");
 		// 页面跳转只有两种：重定向（不能共享request数据）或者转发
 		// forward:转发页面和转发到的页面可以共享request里面的数据.
 		// redirect:不能共享数据.
-		// 在转发时，只能转发系统内部页面，因此默认已经添加了工程名
+		// 在转发时，只能转发系统内部页面，因为默认已经添加了工程名
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/query.jsp");
 		dispatcher.forward(request, response);
 		// response.setContentType("text/html");
