@@ -69,7 +69,7 @@ public class ProductDaoImplTest {
 
 	@Test
 	public void testDelete() {
-		daoImpl.delete(12);
+		daoImpl.delete(4);
 	}
 
 }
