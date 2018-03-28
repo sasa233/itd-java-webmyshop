@@ -16,7 +16,7 @@ linux + oracle + weblogic + spring + hibernate + struts
     
     1: 创建表 --》 创建相应Model类(Users)
     
-    2: 创建UsersDaoImpl必须继承BaseDaoImpl
+    2: 创建UsersDaoImpl必须继承BaseDaoImpl<T>
     
     3: 创建UserServiceImpl 必须依赖 UsersDaoImpl
     
@@ -29,3 +29,14 @@ linux + oracle + weblogic + spring + hibernate + struts
     6： 创建login.jsp登录页面
     
     7: 创建admin文件夹,此文件夹是管理员才能访问
+    
+    8: 创建LoginFilter过滤器，对session进行登录判断，记得配置过滤URL-->@WebFilter(urlPatterns = "/admin/*")
+    
+	Request生命周期: 对于每个用户来说,每一次请求都是一个Request对象.重定向会产生新的Request对象
+	Session生命周期: 默认情况与服务器Session交互超过30分钟,则Session自动销毁(Tomcat重启并不会丢失Session)    
+     
+    9: 登录功能实现完毕后,需要给User类实现Serializable接口.在Tomcat停止后查看work目录.通过修改UID.反序列失败测试得知：反序列化是通过：UID来确定类型的唯一性
+     
+    10: 讲解ServletContextListener,此Web组件是单例模式.而且在项目启动时候就加载.特别适合用来初始化数据.(公共数据则可以存储到全局唯一application内置对象中)
+    
+    

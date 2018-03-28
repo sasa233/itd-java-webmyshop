@@ -27,10 +27,10 @@ public class EncodingFilter implements Filter {
 
 	}
 
-	@Override // 复合条件的请求会进入doF方法中ilter
+	@Override // 复合条件的请求会进入doFilter方法中
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		System.out.println("doFilter......");
+		System.out.println("doFilter to encode......");
 		//所有请求进入后可配置编码
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");

@@ -11,6 +11,9 @@
   
   <body>
     This is my JSP page. <br>
-    此页面必须登录后才能被访问。（为实现此功能，需要重新创建一个filter。）
+    此页面必须登录后才能被访问。（为实现此功能，需要重新创建一个filter）<br>
+    
+    您好${sessionScope.users.name}，欢迎登录管理员页面~
+    
   </body>
 </html>

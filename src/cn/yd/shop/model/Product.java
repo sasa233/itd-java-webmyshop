@@ -1,12 +1,13 @@
 package cn.yd.shop.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 //CTRL + Tree, 可查看父子类，有子类有父类，建议使用父类，父类可使用的方法更多（有接口建议用接口→面向接口编程）
 import java.util.Date; 
 
 
 //所有的类都继承object
-public class Product extends Object {
+public class Product extends Object implements Serializable{
 
 	/*
 	 * create table product
@@ -19,6 +20,11 @@ public class Product extends Object {
    	date                timestamp default CURRENT_TIMESTAMP,
    	primary key (id)
 	);*/
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3878976509085351163L;
 	
 	//原始类型int不能存null；引用类型Integer的初始值为null
 	//原始类型无属性和方法

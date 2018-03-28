@@ -67,17 +67,20 @@ public class UsersServlet extends HttpServlet {
 			Users users = usersService.login(request.getParameter("name"),
 					request.getParameter("password"));
 			if(users != null){
+				// 后台首页可以通过读取session获取登录用户的信息       
 				request.getSession().setAttribute("users", users);
 				System.out.println("登录成功！");
-				// 接着跳转到后台
+				// 3: 返回结果(jsp/json)
+				// 若登录成功，则重定向到后台首页，数据存储在session中
+				response.sendRedirect(request.getContextPath() + "/admin/index.jsp");
 			}else{
 				request.setAttribute("error", "登录失败！");
+				// 3: 返回结果(jsp/json)
+				request.getRequestDispatcher("/login.jsp").forward(request, response);
 			}
 		} catch (Exception e) {
 			throw new RuntimeException();
 		}
-		// 3: 返回结果(jsp/json)
-		request.getRequestDispatcher("/login.jsp").forward(request, response);
 	}
 
 	/**

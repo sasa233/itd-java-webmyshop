@@ -37,7 +37,7 @@ public class ProductDaoImplTest {
 	public void testQueryByName1() throws Exception {
 		ArrayList<Product> proList = daoImpl.queryByName("笔记", 1, 3);
 		for (Product temp : proList) {
-			System.out.println(temp.toString());
+			System.out.println(temp);
 		}
 	}
 

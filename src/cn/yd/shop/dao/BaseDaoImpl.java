@@ -95,7 +95,6 @@ public abstract class BaseDaoImpl<T> {
 				//t = this.getRow(rs);
 				t = mapper.mapRow(rs);
 			}
-			
 			// 5、释放connection连接对象, 调用工具类的方法
 			// connection.close();
 			return t;
