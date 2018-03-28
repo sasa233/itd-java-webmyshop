@@ -10,14 +10,16 @@ import cn.yd.shop.model.Users;
 
 public class UserServiceImplTest {
 
-	private UserServiceImpl usersService = new UserServiceImpl();
+	private static UserServiceImpl usersService = null;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		usersService = new UserServiceImpl();
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
+		usersService = null;
 	}
 
 	@Test

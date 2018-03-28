@@ -1,5 +1,6 @@
 package cn.yd.shop.service;
 
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
@@ -12,14 +13,16 @@ import cn.yd.shop.model.Product;
 
 public class ProductServiceImplTest {
 
-	private static ProductServiceImpl productService = new ProductServiceImpl();
+	private static ProductServiceImpl productService = null;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		productService = new ProductServiceImpl();
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
+		productService = null;
 	}
 
 	@Test
