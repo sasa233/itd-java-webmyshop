@@ -28,8 +28,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     您好！谢谢~ <br>
     
     <!-- 
-    	post可传输密码，安全，性能差，支持文件上传
-    	get 通过地址栏传输，安全性差，性能好
+    	post	可传输密码，安全，性能差，支持文件上传
+    	get 	通过地址栏传输，安全性差，性能好;能传字符，不能传视频
      -->
     此网页用于查询。
     <form action="/webmyshop/servlet/ProductServlet" method="get" >

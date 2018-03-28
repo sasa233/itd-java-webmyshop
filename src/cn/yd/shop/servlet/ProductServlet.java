@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 
 import cn.yd.shop.dao.ProductDaoImpl;
 import cn.yd.shop.model.Product;
+import cn.yd.shop.service.ProductServiceImpl;
 
 // 由于此类继承了HttpServlet，它可接受Http请求，此类可与Dao交互
 
@@ -26,7 +27,7 @@ import cn.yd.shop.model.Product;
 public class ProductServlet extends HttpServlet {
 
 	// 此成员变量用于调用方法，无线程安全问题
-	private ProductDaoImpl productDao = new ProductDaoImpl();
+	private ProductServiceImpl productService = new ProductServiceImpl();
 
 	/*
 	 * Filter,Listener,Servlet称为web三大组件，他们都是单例模式
@@ -64,7 +65,7 @@ public class ProductServlet extends HttpServlet {
 		String id = request.getParameter("id");
 		System.out.println("----->" + id);
 		// 2、获取需要更新的数据
-		Product product = productDao.getByID(Integer.parseInt(id));
+		Product product = productService.getByID(Integer.parseInt(id));
 		// 3
 		request.setAttribute("product", product);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/update.jsp");
@@ -84,7 +85,7 @@ public class ProductServlet extends HttpServlet {
 		product.setRemark(request.getParameter("remark"));
 		System.out.println("get id----->" + request.getParameter("id"));
 		product.setId(Integer.parseInt(request.getParameter("id")));
-		productDao.update(product);
+		productService.update(product);
 		// 返回给客户端响应 页面或JSON
 		// sendRedirect页面重定向，web中访问资源都需要加工程名
 		// Servlet到JSP不能共享request数据
@@ -99,7 +100,7 @@ public class ProductServlet extends HttpServlet {
 		product.setName(request.getParameter("name"));
 		product.setPrice(new BigDecimal(request.getParameter("price")));
 		product.setRemark(request.getParameter("remark"));
-		productDao.save(product);
+		productService.save(product);
 		// 返回给客户端响应 页面或JSON
 		// sendRedirect页面重定向，web中访问资源都需要加工程名
 		// Servlet到JSP不能共享request数据
@@ -116,11 +117,12 @@ public class ProductServlet extends HttpServlet {
 		String keyword = request.getParameter("keyword");
 		session.setAttribute("keyword", keyword);
 		// 2、调用Service业务逻辑
-		List<Product> proList = productDao.queryByName(keyword);
+		List<Product> proList = productService.queryByName(keyword);
 		// 3、返回结果(json/jsp)
 		// Servlet到JSP如何传递数据；JSP提供内置对象：request, session, application
 		request.setAttribute("proList", proList);
 		System.out.println(proList.size());
+		System.out.println(proList);
 		// response.sendRedirect("/webmyshop/query.jsp");
 		// 页面跳转只有两种：重定向（不能共享request数据）或者转发
 		// forward:转发页面和转发到的页面可以共享request里面的数据.
@@ -133,12 +135,12 @@ public class ProductServlet extends HttpServlet {
 	public void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1、获取要删除的id
 		String id = request.getParameter("id");
-		productDao.delete(new Integer(id));
+		productService.delete(new Integer(id));
 		// 2、按照之前的查询关键字查询
 		HttpSession session = request.getSession(); // 每个Session有sessionID
 		System.out.println("session:" + session);
 		String keyword = (String) session.getAttribute("keyword");
-		List<Product> proList = productDao.queryByName(keyword);
+		List<Product> proList = productService.queryByName(keyword);
 		// 3、返回结果(json/jsp)
 		// Servlet到JSP如何传递数据；JSP提供内置对象：request, session, application
 		request.setAttribute("proList", proList);

@@ -100,6 +100,7 @@ public class ProductDaoImpl extends BaseDaoImpl<Product> { // 此处由子类确
 				product.setName(rs.getString("name"));
 				product.setPrice(rs.getBigDecimal("price"));
 				product.setRemark(rs.getString("remark"));
+				product.setDate(rs.getDate("date"));
 				return product;
 			}
 		});

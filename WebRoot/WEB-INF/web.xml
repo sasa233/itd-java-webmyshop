@@ -10,6 +10,17 @@
     <!-- servlet-class是类的全名，为方便维护，以后会用别名代替全名 -->
     <servlet-class>cn.yd.shop.servlet.ProductServlet</servlet-class>
   </servlet>
+ 
+  <servlet>
+    <servlet-name>UserServlet</servlet-name>
+    <servlet-class>cn.yd.shop.servlet.UserServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>UsersServlet</servlet-name>
+    <servlet-class>cn.yd.shop.servlet.UsersServlet</servlet-class>
+  </servlet>
+
+
 
   <!-- 指定了当前servlet的访问地址 -->
   <servlet-mapping>
@@ -17,7 +28,16 @@
     <!-- 访问当前servlet的url地址 -->
     <url-pattern>/servlet/ProductServlet</url-pattern>
   </servlet-mapping>
-  
+
+  <servlet-mapping>
+    <servlet-name>UserServlet</servlet-name>
+    <url-pattern>/servlet/UserServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UsersServlet</servlet-name>
+    <url-pattern>/servlet/UsersServlet</url-pattern>
+  </servlet-mapping>
+
   
     <welcome-file-list>
     <welcome-file>index.html</welcome-file>
