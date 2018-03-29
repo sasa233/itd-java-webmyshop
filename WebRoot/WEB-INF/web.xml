@@ -37,8 +37,13 @@
     <servlet-name>UsersServlet</servlet-name>
     <url-pattern>/servlet/UsersServlet</url-pattern>
   </servlet-mapping>
-
   
+  <session-config>
+  <!-- 单位是分钟 -->
+  	<session-timeout>30</session-timeout>
+  </session-config>
+
+  	<!-- 如下是默认页面 -->
     <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>

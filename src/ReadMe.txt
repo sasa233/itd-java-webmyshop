@@ -40,3 +40,30 @@ linux + oracle + weblogic + spring + hibernate + struts
     10: 讲解ServletContextListener,此Web组件是单例模式.而且在项目启动时候就加载.特别适合用来初始化数据.(公共数据则可以存储到全局唯一application内置对象中)
     
     
+    
+    
+Spring环境搭建,IOC演示
+
+    1: 需要jar + xml配置文件.xml中定义xsd.xml 与jar版本匹配
+    
+    2: 在xml中配置bean标签来管理类，默认是配置文件加载的时候就会创建Bean,且单例
+         
+          2.1： lazy-init="true": 懒汉模式
+          2.2: scope="prototype" 则可以设置为多例
+          
+    3: 可以通过set和构造来进行属性赋值.(IOC依赖注入)
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

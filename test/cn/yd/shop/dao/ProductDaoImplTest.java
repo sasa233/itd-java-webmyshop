@@ -2,6 +2,7 @@ package cn.yd.shop.dao;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -27,7 +28,7 @@ public class ProductDaoImplTest {
 
 	@Test
 	public void testQueryByName() {
-		ArrayList<Product> proList = daoImpl.queryByName("");
+		List<Product> proList = daoImpl.queryByBame("");
 		for (Product temp : proList) {
 			System.out.println(temp.toString());
 		}
@@ -35,7 +36,7 @@ public class ProductDaoImplTest {
 	
 	@Test
 	public void testQueryByName1() throws Exception {
-		ArrayList<Product> proList = daoImpl.queryByName("笔记", 1, 3);
+		List<Product> proList = daoImpl.queryByBame("笔记", 1, 3);
 		for (Product temp : proList) {
 			System.out.println(temp);
 		}
@@ -44,7 +45,7 @@ public class ProductDaoImplTest {
 	@Test
 	public void testGetByID() throws Exception {
 		System.out.println("......");
-		Product product = daoImpl.getByID(7);
+		Product product = daoImpl.getById(7);
 		System.out.println(product);
 	}
 

@@ -5,34 +5,49 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import cn.yd.shop.dao.ProductDaoImpl;
 import cn.yd.shop.model.Product;
 
 public class MainTest {
 
 	// 通过反射获取class文件的所有信息，java → JVM(.class)
-
-	public static void main(String[] args)
-			throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException,
-			SecurityException, IllegalArgumentException, InvocationTargetException, NoSuchFieldException {
-		// 采用普通的方式赋值和采用反射的方法赋值
-		Product product = new Product();
-		product.setId(12);
-		System.out.println(product.getId());
-		// 通过反射的方式进行赋值
-		Class clazz = Class.forName("cn.yd.shop.model.Product");
-		// 根据Product.class文件创建一个Product对象
-		Object t = clazz.newInstance(); // cmd + 2 + R
-		// 在Product.class中获取setID方法
-		Method setId = clazz.getMethod("setId", Integer.class);
-		setId.invoke(t, 15); // product.setId(12);
-		Method getId = clazz.getMethod("getId");
-		System.out.println(getId.invoke(t));
-
-		Field name = clazz.getDeclaredField("name");
-		name.setAccessible(true); // 值为 true 则指示反射的对象在使用时应该取消 Java 语言访问检查
-		name.set(t, "反射");
-		System.out.println(name.get(t));
+	public static void main(String[] args) {
+		// 加载spring的配置文件，默认情况下为饿汉模式（模式包括饿汉模式和懒汉模式）
+		ApplicationContext context = new ClassPathXmlApplicationContext(
+				"spring-bean.xml");
+		//通过id获取相应的class文件，从而创建当前类的对象
+		//System.out.println(context.getBean("product"));
+		//System.out.println(context.getBean("product"));
+		// 只能通过Spring的方式创建,采用使用IOC AOP的功能
+		ProductDaoImpl daoImpl = context.getBean("productDao",ProductDaoImpl.class);
+		daoImpl.delete(3);
 	}
+
+//	public static void main(String[] args)
+//			throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException,
+//			SecurityException, IllegalArgumentException, InvocationTargetException, NoSuchFieldException {
+//		// 采用普通的方式赋值和采用反射的方法赋值
+//		Product product = new Product();
+//		product.setId(12);
+//		System.out.println(product.getId());
+//		// 通过反射的方式进行赋值
+//		Class clazz = Class.forName("cn.yd.shop.model.Product");
+//		// 根据Product.class文件创建一个Product对象
+//		Object t = clazz.newInstance(); // cmd + 2 + R
+//		// 在Product.class中获取setID方法
+//		Method setId = clazz.getMethod("setId", Integer.class);
+//		setId.invoke(t, 15); // product.setId(12);
+//		Method getId = clazz.getMethod("getId");
+//		System.out.println(getId.invoke(t));
+//
+//		Field name = clazz.getDeclaredField("name");
+//		name.setAccessible(true); // 值为 true 则指示反射的对象在使用时应该取消 Java 语言访问检查
+//		name.set(t, "反射");
+//		System.out.println(name.get(t));
+//	}
 
 	public static void refDemo(String[] args) throws ClassNotFoundException {
 		// file对象可以代表：txt/jpg/class等文件类型

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+	
+	<!-- 数据库连接池，需要配置四个参数 -->
+	<!-- set方法注入 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="jdbcUrl" value="jdbc:mysql://localhost:3306/myshop?characterEncoding=utf8&amp;useSSL=true" />
+		<property name="user" value="root" />
+		<property name="password" value="root" />
+	</bean>
+	
+	<!-- 2:配置JdbcTemplate，它依赖DataSource；其取代BaseDoaImpl -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<!-- ref参照xml文件中的id   name:是对应源码中setDataSource方法 -->
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<!-- 3:配置ProductDaoImpl，它依赖JdbcTemplate -->
+	<bean id="productDao" class="cn.yd.shop.dao.ProductDaoImpl">
+		<property name="jdbcTemplate" ref="jdbcTemplate" />
+	</bean>
+	
+	<!-- 4:配置ProductServiceImpl，它依赖ProductDaoImpl -->
+	
+	<!-- 5:通过Junit测试基于Spring的开发环境 -->
+	
+</beans>

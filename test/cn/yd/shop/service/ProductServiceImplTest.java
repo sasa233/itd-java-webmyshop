@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -27,7 +28,7 @@ public class ProductServiceImplTest {
 
 	@Test
 	public void testQueryByNameStringIntInt() throws Exception {
-		ArrayList<Product> proList = productService.queryByName("西服", 1, 3);
+		List<Product> proList = productService.queryByName("西服", 1, 3);
 		for (Product temp : proList) {
 			System.out.println(temp);
 		}
@@ -35,7 +36,7 @@ public class ProductServiceImplTest {
 
 	@Test
 	public void testQueryByNameString() {
-		ArrayList<Product> proList = productService.queryByName("");
+		List<Product> proList = productService.queryByName("");
 		for (Product temp : proList) {
 			System.out.println(temp);
 		}

@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import javax.enterprise.inject.New;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -69,6 +70,9 @@ public class UsersServlet extends HttpServlet {
 			if(users != null){
 				// 后台首页可以通过读取session获取登录用户的信息       
 				request.getSession().setAttribute("users", users);
+//				Cookie[] cookies = request.getCookies();
+//				response.addCookie(cookies[0]);
+//				request.getSession().removeAttribute("");
 				System.out.println("登录成功！");
 				// 3: 返回结果(jsp/json)
 				// 若登录成功，则重定向到后台首页，数据存储在session中

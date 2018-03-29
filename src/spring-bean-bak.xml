@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+	<!-- xmlns的名字与xsi:schemaLocation内容中空格前的名字相同，空格后面即是对应的校验文件 -->
+	<!-- XML有两种：合法XML-符合XML语法；有效XML-符合语法且符合xsd验证规范 -->
+	<!-- 为解决对象创建的三个缺点，时间类型和数量，采用IOC进行代码优化-可以通过set和构造来实现属性的赋值
+	在XML中通过bean标签来管理类,默认是配置文件加载时胡其创建bean且单例 -->
+	<bean id="product" class="cn.yd.shop.model.Product" lazy-init="default" scope="singleton">
+		<!-- 默认会调用set方法 -->
+		<property name="name" value="Macbook" />
+		<!-- 依赖引用对象（通过id） -->
+		<property name="date" ref="date" />
+		<!-- 通过构造方法赋值，需要构造方法具备相应的参数 -->
+		<!--  
+		<constuctor-arg name="name" value="Macbook" />
+		<constuctor-arg name="date" ref="date" />
+		-->
+	</bean>
+	<bean id="date" class="java.util.Date"></bean>
+</beans>

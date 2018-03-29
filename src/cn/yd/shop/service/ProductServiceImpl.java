@@ -3,6 +3,7 @@ package cn.yd.shop.service;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.enterprise.inject.New;
 
@@ -15,20 +16,20 @@ public class ProductServiceImpl {
 
 	private ProductDaoImpl productDao = new ProductDaoImpl();
 
-	public ArrayList<Product> queryByName(String name, int page, int size) throws Exception {
-		return productDao.queryByName(name, page, size);
+	public List<Product> queryByName(String name, int page, int size) throws Exception {
+		return productDao.queryByBame(name, page, size);
 	}
 
 	// java中集合不限大小
 	// 如果没有给集合制定类型，则默认为object类型，可以指定泛型
 	// 数组和集合的区别：数组限制大小、类型（需指定），集合不限大小、类型，泛型集合不限大小、限类型
-	public ArrayList<Product> queryByName(String name) {
-		return productDao.queryByName(name);
+	public List<Product> queryByName(String name) {
+		return productDao.queryByBame(name);
 	}
 
 	// 通过id获取Product
 	public Product getByID(int id) throws Exception {
-		return productDao.getByID(id);
+		return productDao.getById(id);
 	}
 
 	// 完成数据的插入操作
