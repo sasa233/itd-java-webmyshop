@@ -53,7 +53,13 @@ Spring环境搭建,IOC演示
           
     3: 可以通过set和构造来进行属性赋值.(IOC依赖注入)
     
+    4: 数据库连接池,需要配置 4个参数(删除:JdbcUtils)
     
+    5: 配置JdbcTemplate它依赖DataSource(JdbcTemplate 取代 BaseDaoImpl)
+
+    6: 配置ProductDaoImpl它依赖JdbcTemplate (修改ProductDaoImpl的代码,添加setJdbcTemplate)
+    
+    7: MainTest中进行getBean测试(此时是通过SpringIOC来创建对象而非之前new对象 )
     
     
     

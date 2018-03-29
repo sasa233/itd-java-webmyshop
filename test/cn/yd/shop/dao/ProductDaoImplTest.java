@@ -4,26 +4,34 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import cn.yd.shop.model.Product;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations="classpath:spring-bean.xml")
 public class ProductDaoImplTest {
 	
-	private static ProductDaoImpl daoImpl = null;
+	@Resource(name="productDao")
+	private  ProductDaoImpl daoImpl;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		System.out.println("测试方法前执行，一般用来初始化测试对象。");
-		daoImpl = new ProductDaoImpl();
+//		daoImpl = new ProductDaoImpl();
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		System.out.println("在所有测试方法后执行，用来销毁资源。");
-		daoImpl = null;  //java对象会自动被垃圾回收
+//		daoImpl = null;  //java对象会自动被垃圾回收
 	}
 
 	@Test
@@ -45,7 +53,7 @@ public class ProductDaoImplTest {
 	@Test
 	public void testGetByID() throws Exception {
 		System.out.println("......");
-		Product product = daoImpl.getById(7);
+		Product product = daoImpl.getById(5);
 		System.out.println(product);
 	}
 

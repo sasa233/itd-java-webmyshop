@@ -65,7 +65,7 @@ public class ProductServlet extends HttpServlet {
 		String id = request.getParameter("id");
 		System.out.println("----->" + id);
 		// 2、获取需要更新的数据
-		Product product = productService.getByID(Integer.parseInt(id));
+		Product product = productService.getById(Integer.parseInt(id));
 		// 3
 		request.setAttribute("product", product);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/update.jsp");

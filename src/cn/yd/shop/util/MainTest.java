@@ -10,6 +10,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import cn.yd.shop.dao.ProductDaoImpl;
 import cn.yd.shop.model.Product;
+import cn.yd.shop.service.ProductServiceImpl;
 
 public class MainTest {
 
@@ -22,8 +23,12 @@ public class MainTest {
 		//System.out.println(context.getBean("product"));
 		//System.out.println(context.getBean("product"));
 		// 只能通过Spring的方式创建,采用使用IOC AOP的功能
-		ProductDaoImpl daoImpl = context.getBean("productDao",ProductDaoImpl.class);
-		daoImpl.delete(3);
+//		ProductDaoImpl daoImpl = context.getBean("productDao",ProductDaoImpl.class);
+//		daoImpl.delete(3);
+		ProductServiceImpl serviceImpl = context.getBean("productService", ProductServiceImpl.class);
+		for (Product temp : serviceImpl.queryByName("")) {
+			System.out.println(temp);
+		}
 	}
 
 //	public static void main(String[] args)

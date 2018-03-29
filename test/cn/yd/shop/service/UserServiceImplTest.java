@@ -5,29 +5,37 @@ import static org.junit.Assert.*;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import cn.yd.shop.model.Users;
 
 public class UserServiceImplTest {
 
-	private static UserServiceImpl usersService = null;
+	private static ApplicationContext context = null;
+	
+	private static UserServiceImpl userService = null;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		usersService = new UserServiceImpl();
+		//直接通过JVM new的方式创建对象,不具备IOC依赖注入的功能
+		//usersService = new UserServiceImpl();
+		context = new ClassPathXmlApplicationContext("spring-bean.xml");
+		userService = context.getBean("userService", UserServiceImpl.class);
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		usersService = null;
+		userService = null;
 	}
 
 	@Test
 	public void testLogin() throws Exception {
 		String name = "admin";
 		String pass = "***123";
-		Users users = usersService.login(name, pass);
-		System.out.println(users);
+		System.out.println(userService.login(name, pass));
+//		Users users = usersService.login(name, pass);
+//		System.out.println(users);
 	}
 
 }

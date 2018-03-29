@@ -1,29 +1,43 @@
 package cn.yd.shop.service;
 
-import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.fail;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.Resource;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import cn.yd.shop.model.Product;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations="classpath:spring-bean.xml")
 public class ProductServiceImplTest {
 
-	private static ProductServiceImpl productService = null;
+//	private static ApplicationContext context = null;
+	
+	@Resource(name="productService")  // 查找spring-bean.xml中id为productService的Bean，得到这个类
+	private  ProductServiceImpl productService;
+	
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		productService = new ProductServiceImpl();
+		//productService = new ProductServiceImpl();
+//		context = new ClassPathXmlApplicationContext("spring-bean.xml");
+//		productService = context.getBean("productService", ProductServiceImpl.class);
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		productService = null;
+		//静态方法不能操作非静态属性
+		//productService = null;
 	}
 
 	@Test
@@ -43,8 +57,8 @@ public class ProductServiceImplTest {
 	}
 
 	@Test
-	public void testGetByID() {
-		fail("Not yet implemented");
+	public void testGetByID() throws Exception {
+		System.out.println(productService.getById(5));
 	}
 
 	@Test

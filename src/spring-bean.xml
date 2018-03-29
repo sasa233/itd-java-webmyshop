@@ -6,6 +6,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 	
+	<!-- XML实例化顺序为从上至下 -->
 	<!-- 数据库连接池，需要配置四个参数 -->
 	<!-- set方法注入 -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
@@ -26,7 +27,20 @@
 		<property name="jdbcTemplate" ref="jdbcTemplate" />
 	</bean>
 	
+	<!-- 3:配置UserDaoImpl，它依赖JdbcTemplate -->
+	<bean id="userDao" class="cn.yd.shop.dao.UserDaoImpl">
+		<property name="jdbcTemplate" ref="jdbcTemplate" />
+	</bean>
+	
 	<!-- 4:配置ProductServiceImpl，它依赖ProductDaoImpl -->
+	<bean id="productService" class="cn.yd.shop.service.ProductServiceImpl">
+		<property name="productDao" ref="productDao" />
+	</bean>
+	
+	<!-- 4:配置UserServiceImpl，它依赖UserDaoImpl -->
+	<bean id="userService" class="cn.yd.shop.service.UserServiceImpl">
+		<property name="userDao" ref="userDao" />
+	</bean>
 	
 	<!-- 5:通过Junit测试基于Spring的开发环境 -->
 	

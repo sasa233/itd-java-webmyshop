@@ -1,20 +1,20 @@
 package cn.yd.shop.service;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.inject.New;
-
 import cn.yd.shop.dao.ProductDaoImpl;
-import cn.yd.shop.dao.RowMapper;
 import cn.yd.shop.model.Product;
 
 // JSP --> Servlet --> Service --> Dao --> JDBC --> DB
 public class ProductServiceImpl {
 
-	private ProductDaoImpl productDao = new ProductDaoImpl();
+	//private ProductDaoImpl productDao = new ProductDaoImpl();
+	
+	private ProductDaoImpl productDao = null;
+	public void setProductDao(ProductDaoImpl productDao) {
+		this.productDao = productDao;
+	}
+    
 
 	public List<Product> queryByName(String name, int page, int size) throws Exception {
 		return productDao.queryByBame(name, page, size);
@@ -28,7 +28,7 @@ public class ProductServiceImpl {
 	}
 
 	// 通过id获取Product
-	public Product getByID(int id) throws Exception {
+	public Product getById(int id) throws Exception {
 		return productDao.getById(id);
 	}
 

@@ -36,7 +36,7 @@ public class ProductDaoImpl{
 				product.setRemark(rs.getString("remark"));
 				return product;
 			}
-		});	
+		}, id);	
 	}
 	
 	// 如果没有给集合指定类型,则默认就是object类型.可以指定泛型<Product>
