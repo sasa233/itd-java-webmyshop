@@ -35,12 +35,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	<!-- EL表达式搜索顺序为requestScope,sessionScope,applicationScope -->
     	商品价格：<input type="text" name="price" value="${requestScope.product.price}" /><br />
     	商品备注：<input type="text" name="remark" value="${requestScope.product.remark}"/><br />
-    	商品日期：<input type="text" name="remark" value="${requestScope.product.date}"/><br />
+    	<!-- 
+    	商品日期：<input type="text" name="date" value=""/><br /> 
+    	-->
     	<button type="submit">提交</button>
     	<!--  
     	<input type="hidden" name="type" value="update">
     	-->
     	<input type="hidden" name="id" value="${requestScope.product.id}">
+    	获取日期为：${requestScope.product}
     	
     </form>
   </body>

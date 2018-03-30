@@ -29,6 +29,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	商品名称：<input type="text" name="name" value="nana" /><br />
     	商品价格：<input type="text" name="price" value="99.9" /><br />
     	商品备注：<input type="text" name="remark" value="我是备注"/><br />
+    	<!--  
+    	商品日期：<input type="text" name="date" value="??"/> 
+    	--> 
     	<button type="submit">提交</button>
     </form>
   </body>

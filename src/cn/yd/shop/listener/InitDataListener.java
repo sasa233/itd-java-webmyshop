@@ -2,10 +2,14 @@ package cn.yd.shop.listener;
 
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import cn.yd.shop.model.Product;
 import cn.yd.shop.service.ProductServiceImpl;
@@ -14,7 +18,10 @@ import cn.yd.shop.service.ProductServiceImpl;
 //@WebListener // 监听器是不需要配置访问地址的
 public class InitDataListener implements ServletContextListener {
 
-	private ProductServiceImpl productService = new ProductServiceImpl();
+	// 默认时，项目加载后，组件启动优先级为Listener > Filter > sprint-*.xml文件加载，此时productService对象无法生成
+	// 因此如下注解方式不可行
+//	@Resource
+//	private ProductServiceImpl productService = null;
 
 	public InitDataListener() {
 		System.out.println("InitDataListener.........");
@@ -30,7 +37,11 @@ public class InitDataListener implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
 		System.out.println("contextInitialized.........");
-		// 项目启动时，在此处可以加载公共性数据
+		// spring配置文件只能配置一次，项目启动时应加载spring配置文件且存放到Application对象中，若多次写如下代码，实际上会多次加载spring配置文件
+		// 导致相应的对象被创建多次，单例模式失效，实际为多例，如下方式也不可行
+//		ApplicationContext context = new ClassPathXmlApplicationContext("spring-bean.xml");
+//		context.getBean("productService",ProductServiceImpl.class);
+
 		List<Product> proList = productService.queryByName("");
 		// request每次请求一个 session每个用户一个 application每个Tomcat一个
 		ServletContext application = event.getServletContext();
