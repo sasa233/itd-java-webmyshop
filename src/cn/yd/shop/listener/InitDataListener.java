@@ -18,11 +18,14 @@ import cn.yd.shop.service.ProductServiceImpl;
 //@WebListener // 监听器是不需要配置访问地址的
 public class InitDataListener implements ServletContextListener {
 
-	// 默认时，项目加载后，组件启动优先级为Listener > Filter > sprint-*.xml文件加载，此时productService对象无法生成
-	// 因此如下注解方式不可行
+	private ProductServiceImpl productService = null;
+	
+
+//	// 默认时，项目加载后，组件启动优先级为Listener > Filter > sprint-*.xml文件加载，此时productService对象无法生成
+//	// 因此如下注解方式不可行
 //	@Resource
 //	private ProductServiceImpl productService = null;
-
+	
 	public InitDataListener() {
 		System.out.println("InitDataListener.........");
 	}
