@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	get 	通过地址栏传输，安全性差，性能好;能传字符，不能传视频
      -->
     此网页用于查询。
-    <form action="/webmyshop/servlet/ProductServlet" method="get" >
+    <form action="${pageContext.request.contextPath}/productController/query.mvc" method="get" >
        	关键字：<input type="text" name="keyword" /><br />
     	<button type="submit">提交</button>
     	<input type="hidden" name="type" value="query">
@@ -64,8 +64,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		<td>${product.price}</td>
     		<td>${product.remark}</td>
     		<td>${product.date}</td>
-    		<td><a href="/webmyshop/servlet/ProductServlet?id=${product.id}&type=delete" >删除</a>
-    		|<a href="/webmyshop/servlet/ProductServlet?id=${product.id}&type=getById" >更新</td>
+    		<td><a href="${pageContext.request.contextPath}/productController/delete.mvc?id=${product.id}" >删除</a>
+    		|<a href="${pageContext.request.contextPath}/productController/getById.mvc?id=${product.id}" >更新</td>
     	</tr>
     	</c:forEach>
     </table>

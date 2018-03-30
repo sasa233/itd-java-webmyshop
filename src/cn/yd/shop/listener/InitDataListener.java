@@ -11,7 +11,7 @@ import cn.yd.shop.model.Product;
 import cn.yd.shop.service.ProductServiceImpl;
 
 // 监听器ServletContextListener：在项目启动时创建，为单例模式，主要用来实现数据的初始化，主动拦截
-@WebListener // 监听器是不需要配置访问地址的
+//@WebListener // 监听器是不需要配置访问地址的
 public class InitDataListener implements ServletContextListener {
 
 	private ProductServiceImpl productService = new ProductServiceImpl();

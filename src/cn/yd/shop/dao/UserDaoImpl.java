@@ -1,7 +1,5 @@
 package cn.yd.shop.dao;
 
-import java.util.List;
-
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -20,8 +18,12 @@ public class UserDaoImpl {
 	public Users login(String name, String pass) throws Exception{
 		
 		String sql = "select * from users where name = ? and pass = ?";
-		Users users = jdbcTemplate.queryForObject(sql, new Object[]{name, pass}, new BeanPropertyRowMapper<Users> (Users.class));
-		return users;
+		try {
+			Users users = jdbcTemplate.queryForObject(sql, new Object[]{name, pass}, new BeanPropertyRowMapper<Users> (Users.class));
+			return users;
+		} catch (Exception e) {
+			return null;
+		}
 		//List<Users> uList = super.queryByName(sql, new Object[]{name, pass}, Users.class);
 		//return uList.size() == 1 ? uList.get(0) : null;
 	}

@@ -1,6 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+		xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" 
+		id="WebApp_ID" version="3.1">
  
+
+  <!-- web.xml是java web项目的入口（web项目是没有main方法的） -->
+  <servlet>
+  	<!-- servlet-name是类的别名 -->
+    <servlet-name>DispatcherServlet</servlet-name>
+    <!-- servlet-class是类的全名，为方便维护，以后会用别名代替全名 -->
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <!-- 此工具类两个功能：处理符合条件的请求，加载mvc配置文件 -->
+    <init-param>
+    	<param-name>contextConfigLocation</param-name>
+    	<param-value>classpath:spring-mvc.xml,classpath:spring-bean.xml</param-value>
+    </init-param>
+    <!-- Servlet默认实在第一次访问时启动,如下配置数值越小优先级越高，通过此标签配置项目启动时加载 -->
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <!-- 指定了当前servlet的访问地址 -->
+  <servlet-mapping>
+    <servlet-name>DispatcherServlet</servlet-name>
+    <!-- 不同于过滤器，过滤器有过滤链 -->
+    <url-pattern>*.mvc</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>UserServlet</servlet-name>
+    <url-pattern>/servlet/UserServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UsersServlet</servlet-name>
+    <url-pattern>/servlet/UsersServlet</url-pattern>
+  </servlet-mapping>
 
   
   <!-- web.xml是java web项目的入口（web项目是没有main方法的） -->
@@ -21,7 +55,6 @@
   </servlet>
 
 
-
   <!-- 指定了当前servlet的访问地址 -->
   <servlet-mapping>
     <servlet-name>ProductServlet</servlet-name>
@@ -29,14 +62,6 @@
     <url-pattern>/servlet/ProductServlet</url-pattern>
   </servlet-mapping>
 
-  <servlet-mapping>
-    <servlet-name>UserServlet</servlet-name>
-    <url-pattern>/servlet/UserServlet</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>UsersServlet</servlet-name>
-    <url-pattern>/servlet/UsersServlet</url-pattern>
-  </servlet-mapping>
   
   <session-config>
   <!-- 单位是分钟 -->

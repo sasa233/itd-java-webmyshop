@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     您好！谢谢~ <br>
     
     <!-- 所有资源前必须添加工程名 -->
-    <form action="/webmyshop/servlet/ProductServlet" method="post">
+    <form action="${pageContext.request.contextPath}/productController/update.mvc" method="post">
     	<!-- 
     		request.getAttribute(arg0)
     		request.setAttribute(arg0, arg1)
@@ -37,8 +37,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	商品备注：<input type="text" name="remark" value="${requestScope.product.remark}"/><br />
     	商品日期：<input type="text" name="remark" value="${requestScope.product.date}"/><br />
     	<button type="submit">提交</button>
+    	<!--  
     	<input type="hidden" name="type" value="update">
+    	-->
     	<input type="hidden" name="id" value="${requestScope.product.id}">
+    	
     </form>
   </body>
 </html>
