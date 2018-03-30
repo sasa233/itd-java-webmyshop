@@ -23,7 +23,7 @@ public class ProductServiceImplTest {
 
 //	private static ApplicationContext context = null;
 	
-	@Resource(name="productService")  // 查找spring-bean.xml中id为productService的Bean，得到这个类
+	@Resource(name="productService")  // 查找spring-bean.xml中id为productService的Bean，得到这个类的实例化对象
 	private  ProductServiceImpl productService;
 	
 	

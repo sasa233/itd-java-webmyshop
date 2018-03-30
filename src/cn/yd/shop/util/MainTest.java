@@ -1,9 +1,15 @@
 package cn.yd.shop.util;
 
 import java.io.File;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+
+import javax.servlet.annotation.WebServlet;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -12,24 +18,50 @@ import cn.yd.shop.dao.ProductDaoImpl;
 import cn.yd.shop.model.Product;
 import cn.yd.shop.service.ProductServiceImpl;
 
+// 了解注解的基本语法
+@WebServlet(urlPatterns="/hmh")
 public class MainTest {
-
-	// 通过反射获取class文件的所有信息，java → JVM(.class)
+	
+	/*
+	 * @interface + 注解名
+	 * 三种注解：
+	 * 1：元注解-用来定义注解 Target
+	 * 2：系统注解-系统自带的 Override
+	 * 3：自定义注解
+	 * 
+	 * @Target(ElementType.METHOD) 当前注解可以存储的位置，此处为METHOD
+	 * @Retention(RetentionPolicy.SOURCE) 当前注解的生命周期：SOURCE-源码里，CLASS-转换为Class文件时，RUNTIME-加载到Java虚拟机中
+	 * */
+	
 	public static void main(String[] args) {
-		// 加载spring的配置文件，默认情况下为饿汉模式（模式包括饿汉模式和懒汉模式）
-		ApplicationContext context = new ClassPathXmlApplicationContext(
-				"spring-bean.xml");
-		//通过id获取相应的class文件，从而创建当前类的对象
-		//System.out.println(context.getBean("product"));
-		//System.out.println(context.getBean("product"));
-		// 只能通过Spring的方式创建,采用使用IOC AOP的功能
-//		ProductDaoImpl daoImpl = context.getBean("productDao",ProductDaoImpl.class);
-//		daoImpl.delete(3);
-		ProductServiceImpl serviceImpl = context.getBean("productService", ProductServiceImpl.class);
-		for (Product temp : serviceImpl.queryByName("")) {
-			System.out.println(temp);
+		// Main方法执行时就是运行时
+		WebServlet annotation = MainTest.class.getAnnotation(WebServlet.class);
+		if (annotation!=null) {
+			System.out.println(annotation.urlPatterns()[0]);
 		}
 	}
+	
+	@Override
+	public String toString() {
+		return "MainTest [toString()=" + super.toString() + "]";
+	}
+
+//	// 通过反射获取class文件的所有信息，java → JVM(.class)
+//	public static void main(String[] args) {
+//		// 加载spring的配置文件，默认情况下为饿汉模式（模式包括饿汉模式和懒汉模式）
+//		ApplicationContext context = new ClassPathXmlApplicationContext(
+//				"spring-bean.xml");
+//		//通过id获取相应的class文件，从而创建当前类的对象
+//		//System.out.println(context.getBean("product"));
+//		//System.out.println(context.getBean("product"));
+//		// 只能通过Spring的方式创建,采用使用IOC AOP的功能
+////		ProductDaoImpl daoImpl = context.getBean("productDao",ProductDaoImpl.class);
+////		daoImpl.delete(3);
+//		ProductServiceImpl serviceImpl = context.getBean("productService", ProductServiceImpl.class);
+//		for (Product temp : serviceImpl.queryByName("")) {
+//			System.out.println(temp);
+//		}
+//	}
 
 //	public static void main(String[] args)
 //			throws ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchMethodException,
