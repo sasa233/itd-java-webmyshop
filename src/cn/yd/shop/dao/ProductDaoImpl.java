@@ -60,6 +60,11 @@ public class ProductDaoImpl{
 				sql,
 				new Object[] { product.getName(), product.getPrice(),
 						product.getRemark(), product.getPic() });
+		// 执行其他的数据库操作
+		// 如下语句执行时会报错，java.lang.NumberFormatException: For input string: "xxx" at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65
+		// 此处需要处理异常，否则无法回滚，因此需要关注与核心逻辑相关联的有一定耦合性的代码（AOP），例如异常、事务等
+//		Integer.parseInt("xxx");
+//		System.out.println("AOP讲解");
 	}
 
 	public void update(Product product) {

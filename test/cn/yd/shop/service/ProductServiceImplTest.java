@@ -2,6 +2,7 @@ package cn.yd.shop.service;
 
 import static org.junit.Assert.fail;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -63,7 +64,10 @@ public class ProductServiceImplTest {
 
 	@Test
 	public void testSave() {
-		fail("Not yet implemented");
+		Product product = new Product();
+		product.setName("test");
+		product.setPrice(new BigDecimal(99));;
+		productService.save(product);
 	}
 
 	@Test

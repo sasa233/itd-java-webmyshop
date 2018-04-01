@@ -17,6 +17,7 @@
 	<context:component-scan base-package="cn.yd.shop.controller" />
 	
 	<!-- 指定文件上传解析器,需要相应Jar包支持 -->
+	<!-- 下方的id="multipartResolver"不能省略，也不能更改，因为此id在源码中被加载了 -->
  	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 	
 </beans>

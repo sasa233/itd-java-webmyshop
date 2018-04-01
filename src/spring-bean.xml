@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans
-	xmlns="http://www.springframework.org/schema/beans"
+<beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:p="http://www.springframework.org/schema/p"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans 
-	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 	
 	<!-- XML实例化顺序为从上至下 -->
+	
+	
+	
+	
 	<!-- 数据库连接池，需要配置四个参数 -->
 	<!-- set方法注入 -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
@@ -43,5 +49,31 @@
 	</bean>
 	
 	<!-- 5:通过Junit测试基于Spring的开发环境 -->
+	
+	
+	<!-- 如果要使用Spring的声明式事务，需配置事务管理器 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<!-- 配置声明式事务，此处仅配置哪些方法需要动态切入事务 -->
+	<tx:advice id="ad">
+		<tx:attributes>
+			<!-- 配置哪些方法需要事务 propagation="REQUIRED"指所有方法都在运行时动态切入事务 -->
+			<tx:method name="save" propagation="REQUIRED" />
+			<tx:method name="update" propagation="REQUIRED" />
+			<tx:method name="delete" propagation="REQUIRED" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<!-- 配置声明式事务，此处配置哪些类需要动态切入事务 -->
+	<!-- 在Service层切入，因为Service可调用多个Dao，一个事务内可以有多个Dao方法 -->
+	<aop:config>
+		<!-- 配置切面表达式，确定当前事务切入的规则 -->
+		<aop:pointcut expression="execution(* cn.yd.shop.service.*.*(..))" id="pt"/>
+		<aop:advisor advice-ref="ad" pointcut-ref="pt"/>
+	</aop:config>
+	
+	
 	
 </beans>

@@ -84,6 +84,11 @@ spring文件上传操作:
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
     
     
+在mysql操作中: 每条SQL语句是单独的事务. 但是在Java中如果需要多条SQL实现同一事务则需要手动提交事务.
+
+AOP: 面向切面编程 (本质上是采用代理模式,Java的代理有三种： 静态代理 、动态代理(Proxy,CGLIB))
+
+	使用场景: 事务处理、异常处理
     
     
     
