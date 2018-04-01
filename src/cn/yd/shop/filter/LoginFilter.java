@@ -12,6 +12,11 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
+import cn.yd.shop.service.ProductServiceImpl;
+
 /*
  * Filter是单例类，且在项目启动时就会实例化，主动过滤
  * 可实现对请求相同的过滤处理，经典应用场景即是用户的登录
@@ -21,6 +26,11 @@ import javax.servlet.http.HttpSession;
  * */
 @WebFilter(urlPatterns = "/admin/*") // 此处无需写工程名；路径过滤或后缀名过滤
 public class LoginFilter implements Filter {
+	
+	
+	private ProductServiceImpl productService = null;
+	
+	private ApplicationContext context = null;
 
 	// 缺省有一个构造方法
 	public LoginFilter() {
@@ -37,6 +47,11 @@ public class LoginFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		System.out.println("doFilter for login......");
+		
+		context = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext());
+		productService = context.getBean("productService", ProductServiceImpl.class);
+		System.out.println("2: productService-->" + productService);
+		
 		HttpServletRequest req = (HttpServletRequest)request;
 		HttpSession session = req.getSession();
 		if(session.getAttribute("users") != null){

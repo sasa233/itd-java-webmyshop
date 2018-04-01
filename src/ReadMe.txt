@@ -62,6 +62,28 @@ Spring环境搭建,IOC演示
     7: MainTest中进行getBean测试(此时是通过SpringIOC来创建对象而非之前new对象 )
     
     
+ spring + spring mvc项目的运行流程:
+  
+	1: web项目的入口web.xml
+
+	2: ContextLoaderListener会在web.xml中配置(用来加载spring的配置文件) ServletContextListener > Filter > Servlet(load-on-startup)
+ 
+	3: 项目中用来初始化的InitDataListener必须要放在ContextLoaderListener之后
+    
+	4: 然后加载Filter--Sevlet
+    
+    
+spring文件上传操作:
+
+	1: 必须是post请求,而且设置多媒体表单 enctype="multipart/form-data"
+   
+	2: 导入文件上传的2个jar包 (commons-io,commons-fileupload) 
+
+	3: mvc提供了多个文件上传解析器,我们需要确定使用的解析器(spring-mvc.xml)中
+  
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+    
+    
     
     
     

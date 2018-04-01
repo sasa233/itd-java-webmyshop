@@ -25,10 +25,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     您好！谢谢~ <br>
     
     <!-- 所有资源前必须添加工程名 -->
-    <form action="${pageContext.request.contextPath}/productController/save.mvc" method="post">
+    <form action="${pageContext.request.contextPath}/productController/save.mvc" method="post" enctype="multipart/form-data">
     	商品名称：<input type="text" name="name" value="nana" /><br />
     	商品价格：<input type="text" name="price" value="99.9" /><br />
+    	商品图片：<input type="file" name="img" /><br />
     	商品备注：<input type="text" name="remark" value="我是备注"/><br />
+ 
     	<!--  
     	商品日期：<input type="text" name="date" value="??"/> 
     	--> 

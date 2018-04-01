@@ -14,7 +14,8 @@
     <!-- 此工具类两个功能：处理符合条件的请求，加载mvc配置文件 -->
     <init-param>
     	<param-name>contextConfigLocation</param-name>
-    	<param-value>classpath:spring-mvc.xml,classpath:spring-bean.xml</param-value>
+    	<!--  <param-value>classpath:spring-mvc.xml,classpath:spring-bean.xml</param-value>  -->
+    	<param-value>classpath:spring-mvc.xml</param-value>
     </init-param>
     <!-- Servlet默认实在第一次访问时启动,如下配置数值越小优先级越高，通过此标签配置项目启动时加载 -->
     <load-on-startup>1</load-on-startup>
@@ -67,6 +68,24 @@
   <!-- 单位是分钟 -->
   	<session-timeout>30</session-timeout>
   </session-config>
+  
+  
+  <context-param>
+ 		<param-name>contextConfigLocation</param-name>
+ 		<param-value>classpath:spring-bean.xml</param-value>
+ 	</context-param>
+ 	
+ 	<!-- 
+ 		此监听器继承: ServletContextListener,因此在项目启动时会执行,用来加载Spring的配置文件
+ 		此监听器是最优先启动的
+ 	 -->
+ 	<listener>
+ 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+ 	</listener>
+ 	
+ 	<listener>
+ 		<listener-class>cn.yd.shop.listener.InitDataListener</listener-class>
+ 	</listener>
 
   	<!-- 如下是默认页面 -->
     <welcome-file-list>

@@ -1,9 +1,12 @@
 package cn.yd.shop.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.StringWriter;
 import java.math.BigDecimal;
 import java.nio.channels.SeekableByteChannel;
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
@@ -13,6 +16,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import cn.yd.shop.model.Product;
 
@@ -36,12 +41,27 @@ public class ProductController extends BaseController{ //单例模式，项目�
 	// ProductController项目启动时初始化，且单例模式
 	public ProductController() {
 		System.out.println("ProductController......");
+		for(int i=0;i<=10;i++){
+			System.out.println(UUID.randomUUID().toString());
+		}
 	}
 
 	// 1：获取参数
 	@RequestMapping("/save")
-	public String save(Product product){
+	public String save(Product product, @RequestParam("img") MultipartFile file){
 	
+		// 实现文件上传
+		String path = request.getServletContext().getRealPath("/images/");
+		// 上传文件名
+		String filename = file.getOriginalFilename();
+		File dest = new File(path, filename);
+		try {
+			file.transferTo(dest);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		} 
+		product.setPic(filename);
+		
 //		product.setName(request.getParameter("name"));
 //		product.setPrice(new BigDecimal(request.getParameter("price")));
 //		product.setRemark(request.getParameter("remark"));

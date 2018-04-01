@@ -10,6 +10,10 @@ public class ProductServiceImpl {
 
 	//private ProductDaoImpl productDao = new ProductDaoImpl();
 	
+	public ProductServiceImpl(){
+		System.out.println("ProductServiceImpl()只能执行一次。。。。");
+	}
+	
 	private ProductDaoImpl productDao = null;
 	public void setProductDao(ProductDaoImpl productDao) {
 		this.productDao = productDao;

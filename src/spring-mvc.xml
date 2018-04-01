@@ -16,4 +16,7 @@
 	<mvc:annotation-driven />
 	<context:component-scan base-package="cn.yd.shop.controller" />
 	
+	<!-- 指定文件上传解析器,需要相应Jar包支持 -->
+ 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+	
 </beans>

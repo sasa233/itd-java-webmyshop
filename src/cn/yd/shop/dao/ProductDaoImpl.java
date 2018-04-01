@@ -55,11 +55,11 @@ public class ProductDaoImpl{
 
 	// 完成数据的插入操作 ctrl + shift + f
 	public void save(Product product) {
-		String sql = "insert into product (name,price,remark,date) values (?,?,?,?)";
+		String sql = "insert into product (name,price,remark,pic) values (?,?,?,?)";
 		jdbcTemplate.update(
 				sql,
 				new Object[] { product.getName(), product.getPrice(),
-						product.getRemark(), product.getDate() });
+						product.getRemark(), product.getPic() });
 	}
 
 	public void update(Product product) {
