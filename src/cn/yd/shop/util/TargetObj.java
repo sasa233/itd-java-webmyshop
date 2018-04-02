@@ -7,7 +7,7 @@ interface MyInterface {
 	public void update();
 }
 
-
+// 静态代理会导致代理类过多，需改用基于反射的动态代理方法
 class ProxyObj implements MyInterface{
 	
 	private MyInterface target;

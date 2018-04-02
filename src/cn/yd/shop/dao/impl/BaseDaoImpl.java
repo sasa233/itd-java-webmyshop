@@ -1,4 +1,4 @@
-package cn.yd.shop.dao;
+package cn.yd.shop.dao.impl;
 
 import java.lang.reflect.Field;
 import java.sql.Connection;
@@ -8,6 +8,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import cn.yd.shop.dao.RowMapper;
 import cn.yd.shop.model.Product;
 import cn.yd.shop.util.JdbcUtil;
 

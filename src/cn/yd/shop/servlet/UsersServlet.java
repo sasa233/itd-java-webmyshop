@@ -12,12 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import cn.yd.shop.model.Users;
-import cn.yd.shop.service.UserServiceImpl;
+import cn.yd.shop.service.UserService;
+import cn.yd.shop.service.impl.UserServiceImpl;
 
 //@WebServlet(urlPatterns = "/servlet/UsersServlet")
 public class UsersServlet extends HttpServlet {
 
-	private UserServiceImpl usersService = new UserServiceImpl();
+	private UserService usersService = new UserServiceImpl();
 
 	/**
 	 * Destruction of the servlet. <br>

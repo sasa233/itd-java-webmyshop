@@ -15,7 +15,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import cn.yd.shop.service.ProductServiceImpl;
+import cn.yd.shop.service.ProductService;
+import cn.yd.shop.service.impl.ProductServiceImpl;
 
 /*
  * Filter是单例类，且在项目启动时就会实例化，主动过滤
@@ -28,7 +29,7 @@ import cn.yd.shop.service.ProductServiceImpl;
 public class LoginFilter implements Filter {
 	
 	
-	private ProductServiceImpl productService = null;
+	private ProductService productService = null;
 	
 	private ApplicationContext context = null;
 

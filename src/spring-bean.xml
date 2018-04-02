@@ -29,22 +29,22 @@
 	</bean>
 	
 	<!-- 3:配置ProductDaoImpl，它依赖JdbcTemplate -->
-	<bean id="productDao" class="cn.yd.shop.dao.ProductDaoImpl">
+	<bean id="productDao" class="cn.yd.shop.dao.impl.ProductDaoImpl">
 		<property name="jdbcTemplate" ref="jdbcTemplate" />
 	</bean>
 	
 	<!-- 3:配置UserDaoImpl，它依赖JdbcTemplate -->
-	<bean id="userDao" class="cn.yd.shop.dao.UserDaoImpl">
+	<bean id="userDao" class="cn.yd.shop.dao.impl.UserDaoImpl">
 		<property name="jdbcTemplate" ref="jdbcTemplate" />
 	</bean>
 	
 	<!-- 4:配置ProductServiceImpl，它依赖ProductDaoImpl -->
-	<bean id="productService" class="cn.yd.shop.service.ProductServiceImpl">
+	<bean id="productService" class="cn.yd.shop.service.impl.ProductServiceImpl">
 		<property name="productDao" ref="productDao" />
 	</bean>
 	
 	<!-- 4:配置UserServiceImpl，它依赖UserDaoImpl -->
-	<bean id="userService" class="cn.yd.shop.service.UserServiceImpl">
+	<bean id="userService" class="cn.yd.shop.service.impl.UserServiceImpl">
 		<property name="userDao" ref="userDao" />
 	</bean>
 	

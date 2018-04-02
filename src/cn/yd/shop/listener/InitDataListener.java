@@ -13,13 +13,14 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import cn.yd.shop.model.Product;
-import cn.yd.shop.service.ProductServiceImpl;
+import cn.yd.shop.service.ProductService;
+import cn.yd.shop.service.impl.ProductServiceImpl;
 
 // 监听器ServletContextListener：在项目启动时创建，为单例模式，主要用来实现数据的初始化，主动拦截
 //@WebListener // 监听器是不需要配置访问地址的，此处已配置于spring-bean.xml文件中
 public class InitDataListener implements ServletContextListener {
 
-	private ProductServiceImpl productService = null;
+	private ProductService productService = null;
 	
 	private ApplicationContext context = null;
 
@@ -47,7 +48,9 @@ public class InitDataListener implements ServletContextListener {
 //		ApplicationContext context = new ClassPathXmlApplicationContext("spring-bean.xml");
 //		context.getBean("productService",ProductServiceImpl.class);
 		context = WebApplicationContextUtils.getWebApplicationContext(event.getServletContext());
-		productService = context.getBean("productService", ProductServiceImpl.class);
+//		productService = context.getBean("productService", ProductServiceImpl.class);
+		// 面向接口编程，层之间
+		productService = context.getBean("productService", ProductService.class);
 		System.out.println("1: productService-->" + productService);
 		List<Product> proList = productService.queryByName("");
 		// request每次请求一个 session每个用户一个 application每个Tomcat一个

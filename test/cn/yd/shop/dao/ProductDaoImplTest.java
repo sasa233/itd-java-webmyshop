@@ -20,7 +20,7 @@ import cn.yd.shop.model.Product;
 public class ProductDaoImplTest {
 	
 	@Resource(name="productDao")
-	private  ProductDaoImpl daoImpl;
+	private  ProductDao daoImpl;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {

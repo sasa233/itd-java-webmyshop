@@ -1,4 +1,4 @@
-package cn.yd.shop.dao;
+package cn.yd.shop.dao.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,13 +8,14 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
+import cn.yd.shop.dao.ProductDao;
 import cn.yd.shop.model.Product;
 
 //ProductDaoImpl可使用BaseDaoImpl提供的方法
 //java是单一继承的，super指向唯一的父类
 //继承是代码复用的手段
 //public class ProductDaoImpl extends BaseDaoImpl<Product> { // 此处由子类确定了了父类BaseDapImpl的<T>的类型
-public class ProductDaoImpl{
+public class ProductDaoImpl implements ProductDao{
 	// ProductDaoImpl依赖jdbcTemplate;如果要实现依赖注入,则需要配置set方法
 	private JdbcTemplate jdbcTemplate;
 	
@@ -24,6 +25,10 @@ public class ProductDaoImpl{
 	}
 	
 	// 通过id获取制定的商品数据
+	/* (non-Javadoc)
+	 * @see cn.yd.shop.dao.ProductDao#getById(int)
+	 */
+	@Override
 	public Product getById(int id){
 		String sql = "select * from product where id=?";
 		return jdbcTemplate.queryForObject(sql, new RowMapper<Product>(){
@@ -40,12 +45,20 @@ public class ProductDaoImpl{
 	}
 	
 	// 如果没有给集合指定类型,则默认就是object类型.可以指定泛型<Product>
+	/* (non-Javadoc)
+	 * @see cn.yd.shop.dao.ProductDao#queryByBame(java.lang.String)
+	 */
+	@Override
 	public List<Product> queryByBame(String name) {
 		String sql = "select * from product where name like ?";
 		return jdbcTemplate.query(sql, new Object[] { "%" + name + "%" },
 				new BeanPropertyRowMapper<Product>(Product.class));
 	}
 	
+	/* (non-Javadoc)
+	 * @see cn.yd.shop.dao.ProductDao#queryByBame(java.lang.String, int, int)
+	 */
+	@Override
 	public List<Product> queryByBame(String name, int page, int size) {
 		String sql = "select * from product where name like ? limit ?,?";
 		return jdbcTemplate.query(sql, new Object[] { "%" + name + "%",
@@ -54,6 +67,10 @@ public class ProductDaoImpl{
 	}
 
 	// 完成数据的插入操作 ctrl + shift + f
+	/* (non-Javadoc)
+	 * @see cn.yd.shop.dao.ProductDao#save(cn.yd.shop.model.Product)
+	 */
+	@Override
 	public void save(Product product) {
 		String sql = "insert into product (name,price,remark,pic) values (?,?,?,?)";
 		jdbcTemplate.update(
@@ -67,6 +84,10 @@ public class ProductDaoImpl{
 //		System.out.println("AOP讲解");
 	}
 
+	/* (non-Javadoc)
+	 * @see cn.yd.shop.dao.ProductDao#update(cn.yd.shop.model.Product)
+	 */
+	@Override
 	public void update(Product product) {
 		String sql = "update product set name=?,price=?,remark=? where id=?   ";
 		jdbcTemplate.update(
@@ -75,6 +96,10 @@ public class ProductDaoImpl{
 						product.getRemark(),product.getId() });
 	}
 
+	/* (non-Javadoc)
+	 * @see cn.yd.shop.dao.ProductDao#delete(int)
+	 */
+	@Override
 	public void delete(int id) {
 		String sql = "delete from product where id = ?";
 		jdbcTemplate.update(sql, id);

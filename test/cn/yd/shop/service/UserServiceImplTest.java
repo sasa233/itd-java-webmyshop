@@ -9,12 +9,13 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import cn.yd.shop.model.Users;
+import cn.yd.shop.service.impl.UserServiceImpl;
 
 public class UserServiceImplTest {
 
 	private static ApplicationContext context = null;
 	
-	private static UserServiceImpl userService = null;
+	private static UserService userService = null;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {

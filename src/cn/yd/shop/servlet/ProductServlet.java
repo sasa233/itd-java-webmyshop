@@ -17,9 +17,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import cn.yd.shop.dao.ProductDaoImpl;
+import cn.yd.shop.dao.impl.ProductDaoImpl;
 import cn.yd.shop.model.Product;
-import cn.yd.shop.service.ProductServiceImpl;
+import cn.yd.shop.service.ProductService;
+import cn.yd.shop.service.impl.ProductServiceImpl;
 
 // 由于此类继承了HttpServlet，它可接受Http请求，此类可与Dao交互
 
@@ -31,7 +32,7 @@ public class ProductServlet extends HttpServlet {
 	// 2、不能控制创建时间--单例模式对象应在项目启动时创建好，然后常驻内存，随时可用（e.g.连接池）
 	// 3、不能控制数量--某单例类依赖的某类可能会被其他的单例类依赖，例如多个Servlet都依赖Service，则出现多个Service
 	// 此成员变量用于调用方法，无线程安全问题
-	private ProductServiceImpl productService = new ProductServiceImpl();
+	private ProductService productService = new ProductServiceImpl();
 
 	/*
 	 * Filter,Listener,Servlet称为web三大组件，他们都是单例模式
