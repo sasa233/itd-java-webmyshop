@@ -50,7 +50,7 @@ public class LoginFilter implements Filter {
 		System.out.println("doFilter for login......");
 		
 		context = WebApplicationContextUtils.getWebApplicationContext(request.getServletContext());
-		productService = context.getBean("productService", ProductServiceImpl.class);
+		productService = context.getBean("productService", ProductService.class);
 		System.out.println("2: productService-->" + productService);
 		
 		HttpServletRequest req = (HttpServletRequest)request;

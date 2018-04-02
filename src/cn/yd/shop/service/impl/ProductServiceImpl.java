@@ -61,8 +61,8 @@ public class ProductServiceImpl implements ProductService {
 		// 执行其他的数据库操作
 		// 配置事务，测试是否回滚
 		// 此处动态代理并没有实现代理类与目标类的接口，采用cglib的方式？？？
-		Integer.parseInt("xxx");
-		System.out.println("AOP讲解");
+//		Integer.parseInt("xxx");
+//		System.out.println("AOP讲解");
 	}
 
 	/* (non-Javadoc)
