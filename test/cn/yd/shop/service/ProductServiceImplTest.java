@@ -65,8 +65,9 @@ public class ProductServiceImplTest {
 	@Test
 	public void testSave() {
 		Product product = new Product();
-		product.setName("test");
-		product.setPrice(new BigDecimal(99));;
+		System.out.println("testSave...");
+		product.setName("test4mybatis");
+		product.setPrice(new BigDecimal(3.33));
 		productService.save(product);
 	}
 

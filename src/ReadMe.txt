@@ -91,7 +91,39 @@ AOP: 面向切面编程 (本质上是采用代理模式,Java的代理有三种�
 	使用场景: 事务处理、异常处理
     
     
-    
+
+spring + mybatis整合流程:
+ 
+     1: 需要添加jar包(mybatis-3.2.3,mybatis-spring-1.2.1)
+     
+     2: 获取mybatis-cfg.xml配置文件(所有Mapper映射文件也需要拷贝到项目中),注意需要同步mybatis-cfg.xml的mapper标签路径
+     
+     3: spring来管理mybatis(SqlSessionFactoryBean去加载mybatis配置文件,从而取代之前JdbcUtils)
+                  
+                     注意: 应该把mybatis-cfg-.xml中的数据库连接配置删除掉(dataSource需要spring管理)
+                     
+         <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+ 		    <property name="dataSource" ref="dataSource" />
+ 		    <property name="configLocation" value="classpath:mybatis-cfg.xml" />
+ 	     </bean>
+     
+     4: Mybatis支持动态代理生成DaoImpl,但是需要遵循如下原则             
+     
+        <!-- mybatis可以自动通过反射,根据给定接口名称,动态生成代理类 -->
+ 		<bean id="productDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+ 			<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+ 			<!-- 生成动态代理,需要指定生成的接口, 
+ 			    1: Mapper文件命名空间与当前接口类全名相同 
+ 			    2: 接口定义的方法,与Mapper文件中id相同
+ 			-->
+ 			<property name="mapperInterface" value="cn.yd.shop.dao.ProductDao" />
+ 		</bean>
+     
+     5: 让当前ProductService 依赖生成的上面生成的ID名称 (相应ProductDaoImpl删除)
+     
+     6: 采用Junit完成测试   
+   
+
     
     
     

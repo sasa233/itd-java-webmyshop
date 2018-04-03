@@ -28,9 +28,23 @@
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
+	<!-- spring与mybatis整合切入点: spring通过提供的工具类,去加载mybatis的主配置文件(主配置文件又会加载Mapper映射文件) -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+ 		<property name="configLocation" value="classpath:mybatis-cfg.xml" />
+	</bean>
+	
+	
 	<!-- 3:配置ProductDaoImpl，它依赖JdbcTemplate -->
+	<!--  
 	<bean id="productDao" class="cn.yd.shop.dao.impl.ProductDaoImpl">
 		<property name="jdbcTemplate" ref="jdbcTemplate" />
+	</bean>
+	-->
+	<!-- 3:配置ProductDaoImpl，它依赖sqlSessionFactory -->
+	<bean id="productDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="cn.yd.shop.dao.ProductDao" />
 	</bean>
 	
 	<!-- 3:配置UserDaoImpl，它依赖JdbcTemplate -->
@@ -57,7 +71,7 @@
 	</bean>
 	
 	<!-- 配置声明式事务，此处仅配置哪些方法需要动态切入事务 -->
-	<tx:advice id="ad">
+	<tx:advice id="ad" transaction-manager="transactionManager">
 		<tx:attributes>
 			<!-- 配置哪些方法需要事务 propagation="REQUIRED"指所有方法都在运行时动态切入事务 -->
 			<tx:method name="save" propagation="REQUIRED" />

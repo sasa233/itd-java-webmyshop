@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+
+
+  <!-- 
+  	<!ELEMENT configuration (properties?, settings?, typeAliases?, typeHandlers?, objectFactory?, objectWrapperFactory?, reflectorFactory?, plugins?, environments?, databaseIdProvider?, mappers?)>
+   	配置文件mybatis-3-config.dtd中说明了mybatis-cfg.xml中各个标签的顺序：“,”代表了先后顺序，“?”代表0或1个，“*”代表0或多个，“+”代表1或多个。
+  -->
+   
+  <typeAliases>
+  	<!--  
+  	<typeAlias type="cn.yd.shop.model.Product" alias="product"/>
+  	-->
+  	<!-- 配置用于存储model的报名，其中的类会自动扫描，它们的默认别名就是类的简单名称（且第一个字母小写） -->
+  	<package name="cn.yd.shop.model"/>
+  </typeAliases>
+
+
+  <!-- 指定使用的连接池的配置 -->
+  <!-- <environments default="development"> -->
+  	<!-- 连接数据库的相关配置 -->
+    <!-- <environment id="development"> -->
+      <!-- 默认采用JDBC事务管理，在mybatis中事务是手动提交的(默认开启，手动提交) -->
+      <!-- <transactionManager type="JDBC"/> -->
+      <!-- 配置数据库连接池 -->
+      <!-- 
+      <dataSource type="POOLED">
+        <property name="driver" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/myshop?characterEncoding=utf8&amp;useSSL=true"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+      </dataSource>
+    </environment>
+  </environments>
+  -->
+  
+  <!-- 映射文件，此文件以后会写入sql代码 -->
+  <mappers>
+    <mapper resource="cn/yd/shop/dao/impl/productMapper.xml" />
+  </mappers>
+  
+</configuration>
