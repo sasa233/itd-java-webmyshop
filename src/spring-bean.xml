@@ -41,11 +41,28 @@
 		<property name="jdbcTemplate" ref="jdbcTemplate" />
 	</bean>
 	-->
+	
+	
 	<!-- 3:配置ProductDaoImpl，它依赖sqlSessionFactory -->
+	<!-- mybatis可以自动通过反射,根据给定接口名称,动态生成代理类 -->
 	<bean id="productDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+			<!-- 生成动态代理,需要指定生成的接口, 
+ 		    	1: Mapper文件命名空间与当前接口类全名相同 
+ 		    	2: 接口定义的方法,与Mapper文件中id相同
+ 		    -->
 		<property name="mapperInterface" value="cn.yd.shop.dao.ProductDao" />
 	</bean>
+	<!-- 当dao数量较多时,此方法代码有冗余,可以参考别名包扫描注册 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 指定要扫描的包（dao的接口层） -->
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="basePackage" value="cn.yd.shop.dao" />
+	</bean>
+		
+	
+	
+	
 	
 	<!-- 3:配置UserDaoImpl，它依赖JdbcTemplate -->
 	<bean id="userDao" class="cn.yd.shop.dao.impl.UserDaoImpl">

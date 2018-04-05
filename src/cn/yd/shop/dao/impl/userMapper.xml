@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="cn.yd.shop.dao.UserDao"> <!-- 命名空间？？？ -->
+	
+	<!-- resultType: 指定的是集合里面存储的类型,而非返回的类型(查询多个数据肯定返回集合类型) -->
+	<!-- parameterType="map" 去掉，采用注解的方式捆绑参数 -->
+	<select id="login" resultType="Users">
+		select * from product where user=#{user} and pass=#{pass}
+	</select>
+
+</mapper>

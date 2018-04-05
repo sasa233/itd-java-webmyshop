@@ -22,7 +22,7 @@ public class UserServiceImplTest {
 		//直接通过JVM new的方式创建对象,不具备IOC依赖注入的功能
 		//usersService = new UserServiceImpl();
 		context = new ClassPathXmlApplicationContext("spring-bean.xml");
-		userService = context.getBean("userService", UserServiceImpl.class);
+		userService = context.getBean("userService", UserService.class);
 	}
 
 	@AfterClass

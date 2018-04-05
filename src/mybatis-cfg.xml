@@ -15,7 +15,7 @@
   	<!--  
   	<typeAlias type="cn.yd.shop.model.Product" alias="product"/>
   	-->
-  	<!-- 配置用于存储model的报名，其中的类会自动扫描，它们的默认别名就是类的简单名称（且第一个字母小写） -->
+  	<!-- 配置用于存储model的包名，其中的类会自动扫描，它们的默认别名就是类的简单名称（且第一个字母小写） -->
   	<package name="cn.yd.shop.model"/>
   </typeAliases>
 
@@ -41,6 +41,7 @@
   <!-- 映射文件，此文件以后会写入sql代码 -->
   <mappers>
     <mapper resource="cn/yd/shop/dao/impl/productMapper.xml" />
+    <mapper resource="cn/yd/shop/dao/impl/userMapper.xml" />
   </mappers>
   
 </configuration>
