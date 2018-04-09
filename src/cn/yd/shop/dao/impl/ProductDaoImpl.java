@@ -49,7 +49,7 @@ public class ProductDaoImpl implements ProductDao{
 	 * @see cn.yd.shop.dao.ProductDao#queryByBame(java.lang.String)
 	 */
 	@Override
-	public List<Product> queryByBame(String name) {
+	public List<Product> queryByName(String name) {
 		String sql = "select * from product where name like ?";
 		return jdbcTemplate.query(sql, new Object[] { "%" + name + "%" },
 				new BeanPropertyRowMapper<Product>(Product.class));
@@ -59,7 +59,7 @@ public class ProductDaoImpl implements ProductDao{
 	 * @see cn.yd.shop.dao.ProductDao#queryByBame(java.lang.String, int, int)
 	 */
 	@Override
-	public List<Product> queryByBame(String name, int page, int size) {
+	public List<Product> queryByName(String name, int page, int size) {
 		String sql = "select * from product where name like ? limit ?,?";
 		return jdbcTemplate.query(sql, new Object[] { "%" + name + "%",
 				(page - 1) * size, size }, new BeanPropertyRowMapper<Product>(
@@ -72,11 +72,11 @@ public class ProductDaoImpl implements ProductDao{
 	 */
 	@Override
 	public void save(Product product) {
-		String sql = "insert into product (name,price,remark,pic) values (?,?,?,?)";
-		jdbcTemplate.update(
-				sql,
-				new Object[] { product.getName(), product.getPrice(),
-						product.getRemark(), product.getPic() });
+//		String sql = "insert into product (name,price,remark,pic) values (?,?,?,?)";
+//		jdbcTemplate.update(
+//				sql,
+//				new Object[] { product.getName(), product.getPrice(),
+//						product.getRemark(), product.getPic() });
 		// 执行其他的数据库操作
 		// 如下语句执行时会报错，java.lang.NumberFormatException: For input string: "xxx" at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65
 		// 此处需要处理异常，否则无法回滚，因此需要关注与核心逻辑相关联的有一定耦合性的代码（AOP），例如异常、事务等

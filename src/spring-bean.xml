@@ -23,11 +23,12 @@
 	</bean>
 	
 	<!-- 2:配置JdbcTemplate，它依赖DataSource；其取代BaseDoaImpl -->
-	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-		<!-- ref参照xml文件中的id   name:是对应源码中setDataSource方法 -->
-		<property name="dataSource" ref="dataSource" />
-	</bean>
+	<!--  <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate"> -->
+		<!-- ref参照xml文件中的id name:是对应源码中setDataSource方法 -->
+		<!-- <property name="dataSource" ref="dataSource" /> -->
+	<!-- </bean> -->
 	
+	<!-- 2:配置SqlSessionFactoryBean，它依赖DataSource；其取代JdbcTemplate -->
 	<!-- spring与mybatis整合切入点: spring通过提供的工具类,去加载mybatis的主配置文件(主配置文件又会加载Mapper映射文件) -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
@@ -53,6 +54,14 @@
  		    -->
 		<property name="mapperInterface" value="cn.yd.shop.dao.ProductDao" />
 	</bean>
+	
+	<!-- 3:配置UserDaoImpl，它依赖JdbcTemplate -->
+	<!--
+	<bean id="userDao" class="cn.yd.shop.dao.impl.UserDaoImpl">
+		<property name="jdbcTemplate" ref="jdbcTemplate" />
+	</bean>
+	 -->
+	
 	<!-- 当dao数量较多时,此方法代码有冗余,可以参考别名包扫描注册 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<!-- 指定要扫描的包（dao的接口层） -->
@@ -61,13 +70,6 @@
 	</bean>
 		
 	
-	
-	
-	
-	<!-- 3:配置UserDaoImpl，它依赖JdbcTemplate -->
-	<bean id="userDao" class="cn.yd.shop.dao.impl.UserDaoImpl">
-		<property name="jdbcTemplate" ref="jdbcTemplate" />
-	</bean>
 	
 	<!-- 4:配置ProductServiceImpl，它依赖ProductDaoImpl -->
 	<bean id="productService" class="cn.yd.shop.service.impl.ProductServiceImpl">

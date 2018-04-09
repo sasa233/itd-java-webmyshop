@@ -52,11 +52,11 @@ public class InitDataListener implements ServletContextListener {
 		// 面向接口编程，层之间
 		productService = context.getBean("productService", ProductService.class);
 		System.out.println("1: productService-->" + productService);
-		List<Product> proList = productService.queryByName("");
-		// request每次请求一个 session每个用户一个 application每个Tomcat一个
-		ServletContext application = event.getServletContext();
-		System.out.println("contextInitialized: " + application);
-		application.setAttribute("proList", proList);
+//		List<Product> proList = productService.queryByName("");
+//		// request每次请求一个 session每个用户一个 application每个Tomcat一个
+//		ServletContext application = event.getServletContext();
+//		System.out.println("contextInitialized: " + application);
+//		application.setAttribute("proList", proList);
 	}
 
 }

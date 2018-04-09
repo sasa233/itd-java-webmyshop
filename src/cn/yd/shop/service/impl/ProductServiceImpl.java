@@ -28,7 +28,7 @@ public class ProductServiceImpl implements ProductService {
 	 */
 	@Override
 	public List<Product> queryByName(String name, int page, int size) throws Exception {
-		return productDao.queryByBame(name, page, size);
+		return productDao.queryByName(name, page, size);
 	}
 
 	// java中集合不限大小
@@ -39,7 +39,7 @@ public class ProductServiceImpl implements ProductService {
 	 */
 	@Override
 	public List<Product> queryByName(String name) {
-		return productDao.queryByBame(name);
+		return productDao.queryByName(name);
 	}
 
 	// 通过id获取Product

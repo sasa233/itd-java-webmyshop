@@ -65,22 +65,30 @@
 		delete from product where id=#{id}
 	</delete>
 
+	<select id="getById" parameterType="int" resultType="product">
+		select * from product where id=#{id}
+	</select>
+
 	<!-- resultType: 指定的是集合里面存储的类型,而非返回的类型(查询多个数据肯定返回集合类型) -->
-	<select id="queryByName1" parameterType="map" resultType="product">
+	<select id="queryByName" parameterType="string" resultType="product">
 		<!-- 动态查询 -->
-		<!-- select * from product where name like #{abc} -->
+	 	<!-- select * from product where name like #{abc} -->
+		 
 		select * from product
 		<where>
-			<if test="keyword!=null">
-				and name like #{keyword}
+			<if test="name!=null">
+				and name like #{name}
 			</if>
+			<!--  
 			<if test="minPrice!=null">
 				and price &gt; #{minPrice}
 			</if>
 			<if test="maxPrice!=null">
 				and price &lt; #{maxPrice}
 			</if>
+			-->
 		</where>
+		
 	</select>
 
 </mapper>

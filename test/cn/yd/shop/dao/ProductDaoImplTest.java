@@ -36,7 +36,7 @@ public class ProductDaoImplTest {
 
 	@Test
 	public void testQueryByName() {
-		List<Product> proList = daoImpl.queryByBame("");
+		List<Product> proList = daoImpl.queryByName("");
 		for (Product temp : proList) {
 			System.out.println(temp.toString());
 		}
@@ -44,7 +44,7 @@ public class ProductDaoImplTest {
 	
 	@Test
 	public void testQueryByName1() throws Exception {
-		List<Product> proList = daoImpl.queryByBame("笔记", 1, 3);
+		List<Product> proList = daoImpl.queryByName("笔记", 1, 3);
 		for (Product temp : proList) {
 			System.out.println(temp);
 		}

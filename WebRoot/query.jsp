@@ -41,7 +41,7 @@
 			style="margin: 20px">
 			<div class="form-group">
 				<label for="keyword">Search: </label> 
-				<input type="text" name="keyword" id="keyword"
+				<input type="text" name="name" id="keyword"
 				class="form-control"
 					placeholder="全部记录" />
 			</div>

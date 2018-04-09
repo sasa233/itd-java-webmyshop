@@ -95,6 +95,7 @@ public class ProductController extends BaseController{ //单例模式，项目�
 		session.setAttribute("keyword", keyword);
 		// 2、调用Service业务逻辑
 		List<Product> proList = productService.queryByName(keyword);
+		System.out.println("真是奇怪......");
 		// 3、返回结果(json/jsp)
 		// Servlet到JSP如何传递数据；JSP提供内置对象：request, session, application
 		request.setAttribute("proList", proList);
