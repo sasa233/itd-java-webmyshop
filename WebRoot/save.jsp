@@ -4,7 +4,7 @@
 <html>
 <head>
 <title>My JSP 'index.jsp' starting page</title>
-<%@ include file="/publicjspf.jsp"%>
+<%@ include file="/public.jspf"%>
 </head>
 
 <body>

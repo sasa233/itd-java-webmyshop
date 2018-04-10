@@ -10,8 +10,8 @@ import cn.yd.shop.model.Users;
 public class UserController extends BaseController{
 	
 	@RequestMapping("/login")
-	public String login(String name, String password) throws Exception{
-		Users users = userService.login(name, password);
+	public String login(String name, String pass) throws Exception{
+		Users users = userService.login(name, pass);
 		System.out.println(users);
 		if(users != null){
 			// 后台首页可以通过读取session获取登录用户的信息       

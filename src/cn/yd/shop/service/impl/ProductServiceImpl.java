@@ -3,13 +3,14 @@ package cn.yd.shop.service.impl;
 import java.util.List;
 
 import cn.yd.shop.dao.ProductDao;
+import cn.yd.shop.dao.impl.ProductDaoImpl;
 import cn.yd.shop.model.Product;
 import cn.yd.shop.service.ProductService;
 
 // JSP --> Servlet --> Service --> Dao --> JDBC --> DB
 public class ProductServiceImpl implements ProductService {
 
-	// 曾与层之间采用接口依赖，具体注入的实现类取决于spring-bean.xml中配置的真实类型
+	// 层与层之间采用接口依赖，具体注入的实现类取决于spring-bean.xml中配置的真实类型
 	
 	//private ProductDaoImpl productDao = new ProductDaoImpl();
 	

@@ -8,7 +8,7 @@
 <html>
 <head>
 <title>My JSP 'index.jsp' starting page</title>
-<%@ include file="/publicjspf.jsp"%>
+<%@ include file="/public.jspf"%>
 <script></script>
 
 </head>
@@ -41,7 +41,7 @@
 			style="margin: 20px">
 			<div class="form-group">
 				<label for="keyword">Search: </label> 
-				<input type="text" name="name" id="keyword"
+				<input type="text" name="name" 
 				class="form-control"
 					placeholder="全部记录" />
 			</div>

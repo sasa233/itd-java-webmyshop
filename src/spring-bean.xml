@@ -10,9 +10,7 @@
 	
 	<!-- XML实例化顺序为从上至下 -->
 	
-	
-	
-	
+
 	<!-- 数据库连接池，需要配置四个参数 -->
 	<!-- set方法注入 -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
@@ -42,7 +40,6 @@
 		<property name="jdbcTemplate" ref="jdbcTemplate" />
 	</bean>
 	-->
-	
 	
 	<!-- 3:配置ProductDaoImpl，它依赖sqlSessionFactory -->
 	<!-- mybatis可以自动通过反射,根据给定接口名称,动态生成代理类 -->
@@ -107,6 +104,5 @@
 		<aop:advisor advice-ref="ad" pointcut-ref="pt"/>
 	</aop:config>
 	
-	
-	
+
 </beans>
